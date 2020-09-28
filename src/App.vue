@@ -1,56 +1,48 @@
 <template>
   <v-app>
-    <v-app-bar app color="primary" dark>
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-    </v-app-bar>
-
     <v-main>
-      <HelloWorld />
+      <div class="openCamera">
+        <v-btn class="ma-2" @click="openCamera" tile color="indigo" dark
+          >Open Camera</v-btn
+        >
+      </div>
     </v-main>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld";
+import { Plugins, CameraResultType } from "@capacitor/core";
+const { Camera } = Plugins;
 
 export default {
   name: "App",
 
-  components: {
-    HelloWorld
-  },
-
   data: () => ({
     //
-  })
+  }),
+  methods: {
+    async openCamera() {
+      const image = await Camera.getPhoto({
+        quality: 90,
+        allowEditing: true,
+        resultType: CameraResultType.Uri
+      });
+
+      var imageUrl = image.webPath;
+      // Can b  e set to the src of an image now
+      alert(imageUrl);
+      // imageElement.src = imageUrl;
+    }
+  }
 };
 </script>
+
+<style lang="scss" scoped>
+.openCamera {
+  background: #eee;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+</style>

@@ -1,0 +1,14 @@
+{
+  "appId": "com.globo.app",
+  "appName": "app-capacitor",
+  "bundledWebRuntime": false,
+  "npmClient": "yarn",
+  "webDir": "dist",
+  "linuxAndroidStudioPath": "/usr/local/android-studio/bin/studio.sh",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  },
+  "cordova": {}
+}
